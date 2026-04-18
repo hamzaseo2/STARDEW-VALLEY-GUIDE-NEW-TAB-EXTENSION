@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stardew Valley Free Download APK | Guide, Tips & Crops | stardewapksvalley.com</title>
+  <meta name="description" content="Download Stardew Valley APK free for Android. Complete guide with crops, tips, fishing, mining and seasonal strategies. Visit stardewapksvalley.com for free APK download."/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --gold: #f5c842; --gold-dark: #c9942a;
+      --green: #4a7c59; --green-light: #6abf69;
+      --brown: #7c5c2e; --cream: #fdf6e3; --dark: #1a1206;
+      --card-bg: rgba(255,255,255,0.05); --border: rgba(255,255,255,0.1);
+    }
+    body { min-height:100vh; font-family:'Lato',sans-serif; background:#0a1a07; color:white; overflow-x:hidden; overflow-y:auto; }
+
+    /* BG */
+    .bg { position:fixed; inset:0; background: radial-gradient(ellipse at 20% 40%,rgba(74,124,89,.18) 0%,transparent 55%), radial-gradient(ellipse at 80% 20%,rgba(106,191,105,.1) 0%,transparent 45%), linear-gradient(180deg,#0a1a07 0%,#0d2010 50%,#0a1a07 100%); z-index:0; pointer-events:none; }
+    .stars { position:fixed; inset:0; z-index:1; pointer-events:none; }
+    .star { position:absolute; background:white; border-radius:50%; animation:twinkle var(--dur,3s) infinite ease-in-out var(--delay,0s); }
+    @keyframes twinkle { 0%,100%{opacity:.1;transform:scale(1)} 50%{opacity:.9;transform:scale(1.5)} }
+    .firefly { position:fixed; width:4px; height:4px; background:var(--gold); border-radius:50%; box-shadow:0 0 8px var(--gold),0 0 16px rgba(245,200,66,.4); animation:flyAround var(--dur) infinite ease-in-out var(--delay); z-index:2; pointer-events:none; }
+    @keyframes flyAround { 0%{transform:translate(0,0) scale(.5);opacity:0} 20%{opacity:1;transform:translate(30px,-20px) scale(1)} 50%{transform:translate(-20px,-50px) scale(.8)} 80%{opacity:.7;transform:translate(40px,-30px) scale(1)} 100%{transform:translate(0,0) scale(.5);opacity:0} }
+    .ground { position:fixed; bottom:0; left:0; right:0; height:100px; background:linear-gradient(180deg,transparent,rgba(74,124,89,.2) 40%,rgba(20,50,15,.7)); z-index:3; pointer-events:none; }
+    .tree { position:fixed; bottom:30px; z-index:4; animation:sway 4s ease-in-out infinite; pointer-events:none; }
+    @keyframes sway{0%,100%{transform:rotate(-1deg)}50%{transform:rotate(1deg)}}
+
+    /* LAYOUT */
+    .page-wrap { position:relative; z-index:10; max-width:960px; margin:0 auto; padding:40px 24px 140px; }
+
+    /* HERO */
+    .hero { text-align:center; margin-bottom:48px; animation:fadeDown .8s ease both; }
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-24px)}to{opacity:1;transform:translateY(0)}}
+    .hero-clock { font-family:'Cinzel Decorative',cursive; font-size:clamp(50px,9vw,86px); font-weight:700; color:var(--gold); text-shadow:0 0 30px rgba(245,200,66,.5),2px 2px 0 rgba(0,0,0,.6); letter-spacing:4px; line-height:1; margin-bottom:8px; }
+    .hero-date { font-family:'Cinzel',serif; font-size:clamp(11px,1.8vw,16px); color:rgba(245,200,66,.7); letter-spacing:3px; text-transform:uppercase; margin-bottom:22px; }
+    h1.site-h1 { font-family:'Cinzel Decorative',cursive; font-size:clamp(16px,2.8vw,26px); color:var(--green-light); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; text-shadow:0 0 20px rgba(106,191,105,.3); }
+    .hero-tagline { font-size:13px; color:rgba(255,255,255,.5); letter-spacing:2px; margin-bottom:20px; }
+    .season-badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.05); border:1px solid rgba(245,200,66,.3); border-radius:30px; padding:8px 22px; font-size:13px; color:rgba(255,255,255,.8); backdrop-filter:blur(10px); margin-bottom:26px; }
+
+    /* SEARCH */
+    .search-wrap { margin-bottom:20px; }
+    .search-bar { display:flex; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.15); border-radius:30px; overflow:hidden; width:480px; max-width:100%; margin:0 auto; backdrop-filter:blur(10px); transition:border-color .3s; }
+    .search-bar:focus-within { border-color:rgba(245,200,66,.5); box-shadow:0 0 20px rgba(245,200,66,.1); }
+    .search-input { flex:1; background:none; border:none; outline:none; color:white; font-size:14px; padding:12px 20px; font-family:'Lato',sans-serif; }
+    .search-input::placeholder{color:rgba(255,255,255,.35)}
+    .search-btn { background:var(--green); border:none; color:white; padding:12px 20px; cursor:pointer; font-size:16px; transition:background .2s; }
+    .search-btn:hover{background:var(--green-light)}
+
+    /* QUICK LINKS */
+    .quick-links { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:48px; animation:fadeUp .8s ease .3s both; }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .quick-link { display:flex; flex-direction:column; align-items:center; gap:7px; text-decoration:none; padding:14px 18px; background:var(--card-bg); border:1px solid var(--border); border-radius:14px; transition:all .3s; backdrop-filter:blur(10px); min-width:85px; }
+    .quick-link:hover { background:rgba(74,124,89,.3); border-color:var(--green-light); transform:translateY(-4px); box-shadow:0 8px 24px rgba(74,124,89,.3); }
+    .ql-icon{font-size:22px} .ql-label{font-size:9px;color:rgba(255,255,255,.7);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+
+    /* SECTIONS */
+    section { margin-bottom:48px; animation:fadeUp .8s ease both; }
+    .section-header { margin-bottom:18px; }
+    h2.sec-h2 { font-family:'Cinzel',serif; font-size:clamp(15px,2.2vw,20px); color:var(--gold); letter-spacing:2px; padding-bottom:10px; border-bottom:1px solid rgba(245,200,66,.25); margin-bottom:6px; display:flex; align-items:center; gap:10px; }
+    .sec-desc { font-size:12px; color:rgba(255,255,255,.45); letter-spacing:1px; }
+    h3.card-h3 { font-family:'Cinzel',serif; font-size:13px; color:var(--green-light); margin-bottom:12px; letter-spacing:1px; }
+
+    /* SEASON TABS */
+    .season-tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px; }
+    .stab { padding:7px 18px; border-radius:20px; border:1px solid var(--border); background:transparent; color:rgba(255,255,255,.5); font-size:12px; font-weight:700; cursor:pointer; transition:all .2s; font-family:'Lato',sans-serif; }
+    .stab.active { background:var(--green); border-color:var(--green-light); color:white; }
+    .stab:hover:not(.active){color:white;border-color:rgba(255,255,255,.3)}
+    .season-panel{display:none} .season-panel.active{display:block}
+
+    /* CROPS GRID */
+    .crops-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(130px,1fr)); gap:12px; }
+    .crop-card { background:var(--card-bg); border:1px solid var(--border); border-radius:14px; padding:14px 10px; text-align:center; transition:all .25s; }
+    .crop-card:hover { border-color:var(--green-light); transform:translateY(-3px); box-shadow:0 8px 20px rgba(74,124,89,.25); background:rgba(74,124,89,.12); }
+    .crop-emoji{font-size:26px;display:block;margin-bottom:6px}
+    .crop-name{font-family:'Cinzel',serif;font-size:10px;color:white;margin-bottom:4px;font-weight:600}
+    .crop-meta{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;margin-top:4px}
+    .crop-tag{font-size:9px;padding:2px 7px;border-radius:10px;font-weight:700}
+    .tag-days{background:rgba(74,124,89,.3);color:var(--green-light)} .tag-gold{background:rgba(245,200,66,.15);color:var(--gold)}
+    .crop-tip{font-size:9px;color:rgba(255,255,255,.4);margin-top:5px;line-height:1.4}
+
+    /* APK SECTION */
+    .apk-section { background:linear-gradient(135deg,rgba(74,124,89,.2),rgba(106,191,105,.1)); border:1px solid rgba(106,191,105,.3); border-radius:20px; padding:30px; text-align:center; position:relative; overflow:hidden; }
+    .apk-icon{font-size:46px;display:block;margin-bottom:14px}
+    .apk-section h2 { font-family:'Cinzel Decorative',cursive; font-size:clamp(15px,2.3vw,21px); color:var(--green-light); margin-bottom:12px; letter-spacing:2px; border:none; padding:0; }
+    .apk-section p { font-size:13px; color:rgba(255,255,255,.75); line-height:1.75; max-width:540px; margin:0 auto 10px; }
+    .apk-badges { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:18px 0; }
+    .apk-badge { display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15); border-radius:20px; padding:6px 14px; font-size:11px; color:rgba(255,255,255,.8); font-weight:700; }
+    .apk-btn { display:inline-flex; align-items:center; gap:10px; background:var(--green); color:white; text-decoration:none; padding:14px 32px; border-radius:30px; font-size:14px; font-weight:700; letter-spacing:1px; transition:all .3s; box-shadow:0 4px 20px rgba(74,124,89,.4); font-family:'Lato',sans-serif; margin-top:6px; }
+    .apk-btn:hover{background:var(--green-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(74,124,89,.6)}
+
+    /* FISHING */
+    .fishing-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px}
+    .fish-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;transition:all .25s}
+    .fish-card:hover{border-color:rgba(41,128,185,.5);background:rgba(41,128,185,.08)}
+    .fish-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .fish-emoji{font-size:22px} .fish-name{font-family:'Cinzel',serif;font-size:11px;color:white;font-weight:600} .fish-loc{font-size:9px;color:rgba(255,255,255,.4);margin-top:2px}
+    .fish-tags{display:flex;gap:5px;flex-wrap:wrap}
+    .fish-tag{font-size:9px;padding:2px 7px;border-radius:8px;font-weight:700}
+    .tag-season{background:rgba(74,124,89,.3);color:var(--green-light)} .tag-price{background:rgba(245,200,66,.15);color:var(--gold)}
+    .tag-diff{background:rgba(192,57,43,.2);color:#e74c3c} .tag-diff.easy{background:rgba(39,174,96,.2);color:#2ecc71} .tag-diff.med{background:rgba(243,156,18,.2);color:#f39c12}
+
+    /* MINING */
+    .mining-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .mine-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:16px;transition:all .25s}
+    .mine-card:hover{border-color:rgba(149,165,166,.4);background:rgba(149,165,166,.06)}
+    .mine-level{font-family:'Cinzel',serif;font-size:10px;color:var(--gold);letter-spacing:1px;margin-bottom:4px}
+    .mine-emoji{font-size:24px;display:block;margin-bottom:6px} .mine-name{font-family:'Cinzel',serif;font-size:12px;color:white;margin-bottom:4px} .mine-desc{font-size:10px;color:rgba(255,255,255,.5);line-height:1.5}
+
+    /* ARTISAN */
+    .artisan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+    .art-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;transition:all .25s}
+    .art-card:hover{border-color:rgba(156,39,176,.3);background:rgba(156,39,176,.05)}
+    .art-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .art-emoji{font-size:22px} .art-name{font-family:'Cinzel',serif;font-size:11px;color:white} .art-input{font-size:9px;color:rgba(255,255,255,.4);margin-top:1px}
+    .art-profit{font-size:11px;font-weight:700;color:var(--gold);margin-top:6px} .art-desc{font-size:9px;color:rgba(255,255,255,.4);margin-top:3px;line-height:1.4}
+
+    /* CHARACTERS */
+    .chars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px}
+    .char-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;transition:all .25s}
+    .char-card:hover{border-color:rgba(245,200,66,.3);transform:translateY(-3px)}
+    .char-emoji{font-size:28px;display:block;margin-bottom:6px} .char-name{font-family:'Cinzel',serif;font-size:11px;color:white;margin-bottom:3px} .char-role{font-size:9px;color:rgba(255,255,255,.4);margin-bottom:6px} .char-gift{font-size:10px;color:var(--gold)}
+
+    /* TIPS GRID */
+    .tips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+    .tip-card{background:var(--card-bg);border:1px solid var(--border);border-radius:14px;padding:16px 18px;transition:all .25s}
+    .tip-card:hover{border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.04)}
+    .tip-icon{font-size:20px;margin-bottom:8px;display:block} .tip-text{font-size:12px;color:rgba(255,255,255,.75);line-height:1.6}
+
+    /* TIP ROTATOR */
+    .tip-rotator{background:linear-gradient(135deg,rgba(245,200,66,.08),rgba(245,200,66,.03));border:1px solid rgba(245,200,66,.25);border-radius:16px;padding:20px 24px;text-align:center;margin-top:16px}
+    .tip-rotator-label{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+    .tip-rotator-text{font-size:13px;color:rgba(255,255,255,.8);line-height:1.7;min-height:44px}
+    .tip-rotator-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:12px}
+    .tip-nav-btn{background:none;border:1px solid rgba(245,200,66,.3);color:var(--gold);padding:4px 14px;border-radius:12px;cursor:pointer;font-size:11px;transition:all .2s}
+    .tip-nav-btn:hover{background:rgba(245,200,66,.15)} .tip-counter{font-size:10px;color:rgba(255,255,255,.3)}
+
+    /* FOOTER STRIP */
+    .footer-strip{position:fixed;bottom:0;left:0;right:0;z-index:20;background:linear-gradient(90deg,rgba(10,26,7,.96),rgba(13,32,16,.99));border-top:1px solid rgba(74,124,89,.4);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;backdrop-filter:blur(20px)}
+    .footer-logo{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);font-weight:700} .footer-sub{font-size:10px;color:rgba(255,255,255,.4)}
+    .footer-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .footer-link{display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:7px 16px;border-radius:20px;font-size:11px;font-weight:700;transition:all .3s}
+    .footer-link.primary{background:var(--green);color:white} .footer-link.primary:hover{background:var(--green-light);transform:translateY(-1px)}
+    .footer-link.ghost{color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15)} .footer-link.ghost:hover{color:white;border-color:rgba(255,255,255,.35)}
+
+    .highlight{color:var(--green-light);font-weight:700}
+  </style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="stars" id="stars"></div>
+<div class="ground"></div>
+
+<!-- Trees -->
+<div class="tree" style="left:1%;bottom:30px">
+  <svg width="70" height="130" viewBox="0 0 70 130"><rect x="30" y="90" width="10" height="40" fill="#5c3a1e"/><polygon points="35,8 8,70 62,70" fill="#2d5a27"/><polygon points="35,30 5,90 65,90" fill="#3a7a32"/><polygon points="35,52 12,105 58,105" fill="#4a9a40"/></svg>
+</div>
+<div class="tree" style="right:2%;bottom:30px;animation-delay:1.2s;animation-duration:5s">
+  <svg width="55" height="110" viewBox="0 0 55 110"><rect x="24" y="75" width="8" height="35" fill="#5c3a1e"/><polygon points="28,8 4,55 52,55" fill="#2d5a27"/><polygon points="28,28 2,75 54,75" fill="#3a7a32"/><polygon points="28,50 8,90 48,90" fill="#4a9a40"/></svg>
+</div>
+<div class="tree" style="left:11%;bottom:35px;animation-delay:2s;animation-duration:6s">
+  <svg width="45" height="95" viewBox="0 0 45 95"><rect x="19" y="65" width="7" height="30" fill="#5c3a1e"/><polygon points="22,5 2,48 42,48" fill="#2d5a27"/><polygon points="22,25 0,65 44,65" fill="#4a9a40"/></svg>
+</div>
+<div class="tree" style="right:13%;bottom:35px;animation-delay:.6s;animation-duration:4.5s">
+  <svg width="45" height="95" viewBox="0 0 45 95"><rect x="19" y="65" width="7" height="30" fill="#5c3a1e"/><polygon points="22,5 2,48 42,48" fill="#2d5a27"/><polygon points="22,25 0,65 44,65" fill="#4a9a40"/></svg>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="hero-clock" id="clock">00:00</div>
+    <div class="hero-date" id="heroDate">Loading...</div>
+    <!-- H1 — Main keyword -->
+    <h1 class="site-h1">🌾 Stardew Valley Free Download APK & Complete Guide</h1>
+    <p class="hero-tagline">CROPS · FISHING · MINING · CHARACTERS · TIPS · FREE APK DOWNLOAD</p>
+    <div class="season-badge" id="seasonBadge">🌸 Spring Season</div>
+    <div class="search-wrap">
+      <div class="search-bar">
+        <input class="search-input" type="text" id="searchInput" placeholder="Search Stardew Valley wiki, crops, fish, characters..."/>
+        <button class="search-btn" onclick="doSearch()">🔍</button>
+      </div>
+    </div>
+    <div class="quick-links">
+      <a href="https://stardewapksvalley.com/" target="_blank" class="quick-link"><span class="ql-icon">📥</span><span class="ql-label">APK Download</span></a>
+      <a href="https://stardewvalleywiki.com/Crops" target="_blank" class="quick-link"><span class="ql-icon">🌱</span><span class="ql-label">Crops</span></a>
+      <a href="https://stardewvalleywiki.com/Fishing" target="_blank" class="quick-link"><span class="ql-icon">🎣</span><span class="ql-label">Fishing</span></a>
+      <a href="https://stardewvalleywiki.com/Minerals" target="_blank" class="quick-link"><span class="ql-icon">💎</span><span class="ql-label">Mining</span></a>
+      <a href="https://stardewvalleywiki.com/Villagers" target="_blank" class="quick-link"><span class="ql-icon">👥</span><span class="ql-label">Villagers</span></a>
+      <a href="https://stardewapksvalley.com/" target="_blank" class="quick-link"><span class="ql-icon">🎮</span><span class="ql-label">Mods & APK</span></a>
+    </div>
+  </div>
+
+  <!-- ══ H2: FREE APK DOWNLOAD (TOP) ══ -->
+  <section style="animation-delay:.1s">
+    <div class="apk-section">
+      <span class="apk-icon">📱</span>
+      <!-- H2 -->
+      <h2>Download Stardew Valley APK Free for Android</h2>
+      <p>Want to play <strong>Stardew Valley on Android for FREE</strong>? If you are looking to download Stardew Valley without paying, you will need a trusted APK file. An APK (Android Package Kit) lets you install the full game directly on your Android device — no Play Store payment required!</p>
+      <p><span class="highlight">stardewapksvalley.com</span> is your #1 trusted source for a safe, virus-free, and always up-to-date <strong>Stardew Valley APK download</strong> — completely free of charge. Get the latest version of Stardew Valley on Android today!</p>
+      <div class="apk-badges">
+        <div class="apk-badge">✅ 100% Free</div>
+        <div class="apk-badge">🛡️ Virus Free & Safe</div>
+        <div class="apk-badge">📱 All Android Versions</div>
+        <div class="apk-badge">🔄 Always Updated</div>
+        <div class="apk-badge">⚡ Fast Download</div>
+      </div>
+      <a href="https://stardewapksvalley.com/" target="_blank" class="apk-btn">📥 Download Stardew Valley APK Free — stardewapksvalley.com</a>
+    </div>
+  </section>
+
+  <!-- ══ H2: CROPS GUIDE ══ -->
+  <section style="animation-delay:.2s">
+    <div class="section-header">
+      <h2 class="sec-h2">🌱 Stardew Valley Crops Guide — Best Crops Every Season</h2>
+      <p class="sec-desc">Maximize your gold income with the best crops for each season. Never waste a farming day again!</p>
+    </div>
+    <div class="season-tabs">
+      <button class="stab active" onclick="showSeason('spring',this)">🌸 Spring</button>
+      <button class="stab" onclick="showSeason('summer',this)">☀️ Summer</button>
+      <button class="stab" onclick="showSeason('fall',this)">🍂 Fall</button>
+      <button class="stab" onclick="showSeason('winter',this)">❄️ Winter</button>
+    </div>
+
+    <!-- SPRING -->
+    <div class="season-panel active" id="panel-spring">
+      <!-- H3 -->
+      <h3 class="card-h3">🌸 Best Spring Crops in Stardew Valley</h3>
+      <div class="crops-grid">
+        <div class="crop-card"><span class="crop-emoji">🍓</span><div class="crop-name">Strawberry</div><div class="crop-meta"><span class="crop-tag tag-days">8 days</span><span class="crop-tag tag-gold">120g</span></div><div class="crop-tip">Plant Day 1 for max harvests! Regrows every 4 days.</div></div>
+        <div class="crop-card"><span class="crop-emoji">🥔</span><div class="crop-name">Potato</div><div class="crop-meta"><span class="crop-tag tag-days">6 days</span><span class="crop-tag tag-gold">80g</span></div><div class="crop-tip">25% chance for bonus potato per harvest. Easy early gold!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🌷</span><div class="crop-name">Tulip</div><div class="crop-meta"><span class="crop-tag tag-days">6 days</span><span class="crop-tag tag-gold">30g</span></div><div class="crop-tip">Preserves Jar = 110g artisan product. Great early income!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🟡</span><div class="crop-name">Parsnip</div><div class="crop-meta"><span class="crop-tag tag-days">4 days</span><span class="crop-tag tag-gold">35g</span></div><div class="crop-tip">First crop ever! Fastest growing spring crop. Plant Day 1!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🧅</span><div class="crop-name">Garlic</div><div class="crop-meta"><span class="crop-tag tag-days">4 days</span><span class="crop-tag tag-gold">60g</span></div><div class="crop-tip">Pickled garlic = 170g. Fast grow, good artisan income!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🫘</span><div class="crop-name">Green Bean</div><div class="crop-meta"><span class="crop-tag tag-days">10 days</span><span class="crop-tag tag-gold">40g</span></div><div class="crop-tip">Regrows every 3 days. Solid passive income all spring!</div></div>
+      </div>
+    </div>
+
+    <!-- SUMMER -->
+    <div class="season-panel" id="panel-summer">
+      <h3 class="card-h3">☀️ Best Summer Crops in Stardew Valley</h3>
+      <div class="crops-grid">
+        <div class="crop-card"><span class="crop-emoji">⭐</span><div class="crop-name">Starfruit</div><div class="crop-meta"><span class="crop-tag tag-days">13 days</span><span class="crop-tag tag-gold">750g</span></div><div class="crop-tip">Keg = Starfruit Wine 2,250g! #1 gold-making crop!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🫐</span><div class="crop-name">Blueberry</div><div class="crop-meta"><span class="crop-tag tag-days">13 days</span><span class="crop-tag tag-gold">80g</span></div><div class="crop-tip">Yields 3 blueberries! Regrows every 4 days. Best beginner crop!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🍅</span><div class="crop-name">Tomato</div><div class="crop-meta"><span class="crop-tag tag-days">11 days</span><span class="crop-tag tag-gold">60g</span></div><div class="crop-tip">Regrows every 4 days. Great for cooking and gifting!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🌽</span><div class="crop-name">Corn</div><div class="crop-meta"><span class="crop-tag tag-days">14 days</span><span class="crop-tag tag-gold">50g</span></div><div class="crop-tip">Grows Summer AND Fall! Best multi-season crop in game.</div></div>
+        <div class="crop-card"><span class="crop-emoji">🌶️</span><div class="crop-name">Hot Pepper</div><div class="crop-meta"><span class="crop-tag tag-days">5 days</span><span class="crop-tag tag-gold">40g</span></div><div class="crop-tip">Regrows every 3 days. Fast income throughout summer!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🌻</span><div class="crop-name">Sunflower</div><div class="crop-meta"><span class="crop-tag tag-days">8 days</span><span class="crop-tag tag-gold">80g</span></div><div class="crop-tip">Drops seeds on harvest. Oil Maker = 100g per sunflower!</div></div>
+      </div>
+    </div>
+
+    <!-- FALL -->
+    <div class="season-panel" id="panel-fall">
+      <h3 class="card-h3">🍂 Best Fall Crops in Stardew Valley</h3>
+      <div class="crops-grid">
+        <div class="crop-card"><span class="crop-emoji">🍇</span><div class="crop-name">Cranberries</div><div class="crop-meta"><span class="crop-tag tag-days">7 days</span><span class="crop-tag tag-gold">75g</span></div><div class="crop-tip">Yields 2 cranberries per harvest, regrows every 5 days!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🎃</span><div class="crop-name">Pumpkin</div><div class="crop-meta"><span class="crop-tag tag-days">13 days</span><span class="crop-tag tag-gold">320g</span></div><div class="crop-tip">Can grow Giant Pumpkin! Loved gift by many villagers.</div></div>
+        <div class="crop-card"><span class="crop-emoji">🟣</span><div class="crop-name">Amaranth</div><div class="crop-meta"><span class="crop-tag tag-days">7 days</span><span class="crop-tag tag-gold">150g</span></div><div class="crop-tip">High value, no regrow. Great for cooking recipes!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🍯</span><div class="crop-name">Beet</div><div class="crop-meta"><span class="crop-tag tag-days">6 days</span><span class="crop-tag tag-gold">100g</span></div><div class="crop-tip">Beet Wine in Keg = 300g. Quick fall profit!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🍄</span><div class="crop-name">Grape</div><div class="crop-meta"><span class="crop-tag tag-days">10 days</span><span class="crop-tag tag-gold">80g</span></div><div class="crop-tip">Regrows every 3 days. Grape Wine = 240g!</div></div>
+        <div class="crop-card"><span class="crop-emoji">💎</span><div class="crop-name">Sweet Gem Berry</div><div class="crop-meta"><span class="crop-tag tag-days">24 days</span><span class="crop-tag tag-gold">3000g</span></div><div class="crop-tip">Most valuable crop! Give to Old Master Cannoli for reward.</div></div>
+      </div>
+    </div>
+
+    <!-- WINTER -->
+    <div class="season-panel" id="panel-winter">
+      <h3 class="card-h3">❄️ What To Do in Winter — Stardew Valley</h3>
+      <div class="crops-grid">
+        <div class="crop-card"><span class="crop-emoji">🎣</span><div class="crop-name">Fishing</div><div class="crop-meta"><span class="crop-tag tag-days">All Day</span><span class="crop-tag tag-gold">Varies</span></div><div class="crop-tip">Best winter activity! Mountain lake for rare fish species.</div></div>
+        <div class="crop-card"><span class="crop-emoji">⛏️</span><div class="crop-name">Mining</div><div class="crop-meta"><span class="crop-tag tag-days">All Day</span><span class="crop-tag tag-gold">Gems</span></div><div class="crop-tip">Rush Skull Cavern for Iridium. Upgrade tools at Clint!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🏗️</span><div class="crop-name">Build & Craft</div><div class="crop-meta"><span class="crop-tag tag-days">All Day</span><span class="crop-tag tag-gold">Saves gold</span></div><div class="crop-tip">Build Kegs, Preserves Jars, Barns for spring prep.</div></div>
+        <div class="crop-card"><span class="crop-emoji">👥</span><div class="crop-name">Socialise</div><div class="crop-meta"><span class="crop-tag tag-days">All Day</span><span class="crop-tag tag-gold">Hearts</span></div><div class="crop-tip">Give gifts to all villagers. Build heart levels for rewards!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🌿</span><div class="crop-name">Winter Foraging</div><div class="crop-meta"><span class="crop-tag tag-days">Daily</span><span class="crop-tag tag-gold">100g+</span></div><div class="crop-tip">Holly, Crystal Fruit, Nautilus Shell — collect daily!</div></div>
+        <div class="crop-card"><span class="crop-emoji">🐄</span><div class="crop-name">Animal Care</div><div class="crop-meta"><span class="crop-tag tag-days">Daily</span><span class="crop-tag tag-gold">Artisan</span></div><div class="crop-tip">Pet daily! Happy animals = Iridium quality products.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ H2: FISHING GUIDE ══ -->
+  <section style="animation-delay:.3s">
+    <div class="section-header">
+      <h2 class="sec-h2">🎣 Stardew Valley Fishing Guide — Best Fish & Locations</h2>
+      <p class="sec-desc">Fishing is one of the best early gold sources. Know which fish to target and where to find them!</p>
+    </div>
+    <h3 class="card-h3">🏆 Most Valuable Fish to Catch in Stardew Valley</h3>
+    <div class="fishing-grid">
+      <div class="fish-card"><div class="fish-header"><span class="fish-emoji">🦈</span><div><div class="fish-name">Legend</div><div class="fish-loc">📍 Mountain Lake</div></div></div><div class="fish-tags"><span class="fish-tag tag-season">Spring</span><span class="fish-tag tag-price">5000g</span><span class="fish-tag tag-diff">Legendary</span></div></div>
+      <div class="fish-card"><div class="fish-header"><span class="fish-emoji">🐟</span><div><div class="fish-name">Mutant Carp</div><div class="fish-loc">📍 Sewers</div></div></div><div class="fish-tags"><span class="fish-tag tag-season">All Year</span><span class="fish-tag tag-price">1000g</span><span class="fish-tag tag-diff">Hard</span></div></div>
+      <div class="fish-card"><div class="fish-header"><span class="fish-emoji">🎏</span><div><div class="fish-name">Pufferfish</div><div class="fish-loc">📍 Ocean</div></div></div><div class="fish-tags"><span class="fish-tag tag-season">Summer</span><span class="fish-tag tag-price">200g</span><span class="fish-tag tag-diff med">Medium</span></div></div>
+      <div class="fish-card"><div class="fish-header"><span class="fish-emoji">🐡</span><div><div class="fish-name">Catfish</div><div class="fish-loc">📍 River / Secret Woods</div></div></div><div class="fish-tags"><span class="fish-tag tag-season">Spring/Fall</span><span class="fish-tag tag-price">200g</span><span class="fish-tag tag-diff">Hard</span></div></div>
+      <div class="fish-card"><div class="fish-header"><span class="fish-emoji">🐠</span><div><div class="fish-name">Salmon</div><div class="fish-loc">📍 River</div></div></div><div class="fish-tags"><span class="fish-tag tag-season">Fall</span><span class="fish-tag tag-price">75g</span><span class="fish-tag tag-diff easy">Easy</span></div></div>
+      <div class="fish-card"><div class="fish-header"><span class="fish-emoji">🦑</span><div><div class="fish-name">Squid</div><div class="fish-loc">📍 Ocean</div></div></div><div class="fish-tags"><span class="fish-tag tag-season">Winter</span><span class="fish-tag tag-price">80g</span><span class="fish-tag tag-diff med">Medium</span></div></div>
+    </div>
+  </section>
+
+  <!-- ══ H2: MINING GUIDE ══ -->
+  <section style="animation-delay:.35s">
+    <div class="section-header">
+      <h2 class="sec-h2">⛏️ Stardew Valley Mining Guide — Key Mine Level Milestones</h2>
+      <p class="sec-desc">The mines are essential for game progression. Know which levels to target for the best resources!</p>
+    </div>
+    <h3 class="card-h3">🗺️ Important Mine Levels Every Farmer Must Know</h3>
+    <div class="mining-grid">
+      <div class="mine-card"><div class="mine-level">LEVEL 1–40</div><span class="mine-emoji">🪨</span><div class="mine-name">Copper & Iron Zone</div><div class="mine-desc">Get Copper Ore (Level 5) and Iron Ore (Level 40). Essential for first tool upgrades at Clint's Blacksmith.</div></div>
+      <div class="mine-card"><div class="mine-level">LEVEL 40–80</div><span class="mine-emoji">⚙️</span><div class="mine-name">Gold & Gems Zone</div><div class="mine-desc">Gold Ore from Level 80. Diamonds, Rubies, Emeralds found here. Huge gold income from rare gems!</div></div>
+      <div class="mine-card"><div class="mine-level">LEVEL 80–120</div><span class="mine-emoji">💎</span><div class="mine-name">Deep Mines</div><div class="mine-desc">Most valuable minerals here. Completing mines unlocks Skull Cavern for Iridium farming!</div></div>
+      <div class="mine-card"><div class="mine-level">SKULL CAVERN</div><span class="mine-emoji">💜</span><div class="mine-name">Iridium Zone</div><div class="mine-desc">Iridium Ore appears deeper. Use Bombs and Staircases to descend fast. Best gear source in game!</div></div>
+    </div>
+  </section>
+
+  <!-- ══ H2: ARTISAN GOODS ══ -->
+  <section style="animation-delay:.4s">
+    <div class="section-header">
+      <h2 class="sec-h2">🏭 Stardew Valley Artisan Goods — Best Profit Strategy</h2>
+      <p class="sec-desc">Processing crops into artisan goods multiplies your income 2–3x. This is the secret to becoming a millionaire farmer!</p>
+    </div>
+    <h3 class="card-h3">💰 Most Profitable Artisan Products to Make</h3>
+    <div class="artisan-grid">
+      <div class="art-card"><div class="art-header"><span class="art-emoji">🍷</span><div><div class="art-name">Starfruit Wine</div><div class="art-input">Keg + Starfruit (750g)</div></div></div><div class="art-profit">💰 2,250g per bottle</div><div class="art-desc">Triple crop value! Aged in Cask = 4,500g Iridium quality!</div></div>
+      <div class="art-card"><div class="art-header"><span class="art-emoji">🧃</span><div><div class="art-name">Ancient Fruit Wine</div><div class="art-input">Keg + Ancient Fruit</div></div></div><div class="art-profit">💰 1,650g per bottle</div><div class="art-desc">Ancient Fruit regrows every 7 days — passive income machine!</div></div>
+      <div class="art-card"><div class="art-header"><span class="art-emoji">🫙</span><div><div class="art-name">Pickles</div><div class="art-input">Preserves Jar + Veggie</div></div></div><div class="art-profit">💰 2× crop value + 50g</div><div class="art-desc">Perfect for low-value crops like Parsnip and Cauliflower!</div></div>
+      <div class="art-card"><div class="art-header"><span class="art-emoji">🍯</span><div><div class="art-name">Fairy Rose Honey</div><div class="art-input">Bee House near Fairy Rose</div></div></div><div class="art-profit">💰 680g per jar</div><div class="art-desc">Fully passive! Bees collect honey every 4 days automatically.</div></div>
+      <div class="art-card"><div class="art-header"><span class="art-emoji">🧀</span><div><div class="art-name">Goat Cheese</div><div class="art-input">Cheese Press + Goat Milk</div></div></div><div class="art-profit">💰 400g per piece</div><div class="art-desc">Goats produce milk every 2 days. Great passive artisan income!</div></div>
+      <div class="art-card"><div class="art-header"><span class="art-emoji">🥃</span><div><div class="art-name">Pale Ale</div><div class="art-input">Keg + Hops (25g crop)</div></div></div><div class="art-profit">💰 300g per bottle</div><div class="art-desc">Hops regrow daily in Summer — massive ROI from cheap crop!</div></div>
+    </div>
+  </section>
+
+  <!-- ══ H2: CHARACTERS ══ -->
+  <section style="animation-delay:.45s">
+    <div class="section-header">
+      <h2 class="sec-h2">👥 Stardew Valley Characters — Villagers & Gift Guide</h2>
+      <p class="sec-desc">Build relationships for rewards, cutscenes, and marriage. Give the right gifts to gain hearts fast!</p>
+    </div>
+    <h3 class="card-h3">💝 Popular Villagers and Their Loved Gifts</h3>
+    <div class="chars-grid">
+      <div class="char-card"><span class="char-emoji">👩‍🌾</span><div class="char-name">Abigail</div><div class="char-role">Pierre's Daughter</div><div class="char-gift">❤️ Amethyst, Pumpkin</div></div>
+      <div class="char-card"><span class="char-emoji">👨‍⚕️</span><div class="char-name">Harvey</div><div class="char-role">Town Doctor</div><div class="char-gift">❤️ Coffee, Pickles</div></div>
+      <div class="char-card"><span class="char-emoji">👩‍🎨</span><div class="char-name">Leah</div><div class="char-role">Artist</div><div class="char-gift">❤️ Salad, Wine</div></div>
+      <div class="char-card"><span class="char-emoji">👨‍🔬</span><div class="char-name">Sebastian</div><div class="char-role">Programmer</div><div class="char-gift">❤️ Frozen Tear, Sashimi</div></div>
+      <div class="char-card"><span class="char-emoji">👩‍🍳</span><div class="char-name">Emily</div><div class="char-role">Tailor</div><div class="char-gift">❤️ Amethyst, Cloth</div></div>
+      <div class="char-card"><span class="char-emoji">🧙</span><div class="char-name">Wizard</div><div class="char-role">Mystic</div><div class="char-gift">❤️ Purple Mushroom</div></div>
+    </div>
+  </section>
+
+  <!-- ══ H2: PRO TIPS ══ -->
+  <section style="animation-delay:.5s">
+    <div class="section-header">
+      <h2 class="sec-h2">⚡ Stardew Valley Tips & Tricks — Beginner to Expert Guide</h2>
+      <p class="sec-desc">These tips will transform your small farm into a gold-generating empire. Essential reading for every farmer!</p>
+    </div>
+    <h3 class="card-h3">🌟 Essential Tips Every Stardew Valley Player Should Know</h3>
+    <div class="tips-grid">
+      <div class="tip-card"><span class="tip-icon">🌱</span><div class="tip-text"><strong>Plant on Day 1 of Every Season</strong> — Each lost day costs you a full harvest. Buy seeds from Pierre immediately on Day 1 and plant everything. Time is your most valuable resource in Stardew Valley!</div></div>
+      <div class="tip-card"><span class="tip-icon">🏺</span><div class="tip-text"><strong>Build Kegs & Preserves Jars ASAP</strong> — Processing crops into wine or pickles doubles or triples their value. 50 Kegs running Ancient Fruit Wine is end-game level income in Stardew Valley.</div></div>
+      <div class="tip-card"><span class="tip-icon">🎒</span><div class="tip-text"><strong>Upgrade Your Backpack Early</strong> — The Large Pack from Pierre's (2,000g) gives 36 slots. More items per trip = more gold per day. Essential in Year 1, Spring!</div></div>
+      <div class="tip-card"><span class="tip-icon">💧</span><div class="tip-text"><strong>Upgrade Watering Can to Gold</strong> — Gold Watering Can waters a 3×3 area in one action. This saves massive time and energy. Get it before Spring Year 2!</div></div>
+      <div class="tip-card"><span class="tip-icon">🏠</span><div class="tip-text"><strong>Always Use the Shipping Box</strong> — The Shipping Box next to your farmhouse gives full price. Pierre buys at lower prices. Always ship crops, never sell to Pierre!</div></div>
+      <div class="tip-card"><span class="tip-icon">🤝</span><div class="tip-text"><strong>Give Two Gifts Per Week</strong> — Each villager accepts 2 gifts per week. Give loved gifts (not just liked) for max heart gain. This unlocks great rewards, recipes, and cutscenes!</div></div>
+      <div class="tip-card"><span class="tip-icon">📦</span><div class="tip-text"><strong>Complete the Community Center Fast</strong> — Restoring the Community Center gives massive rewards including the Greenhouse — grow any crop all year round, even in Winter!</div></div>
+      <div class="tip-card"><span class="tip-icon">🌙</span><div class="tip-text"><strong>Never Stay Up Past 2 AM</strong> — Passing out at 2 AM causes you to lose gold and items. Always sleep before 2 AM. Time management is the #1 skill in Stardew Valley!</div></div>
+      <div class="tip-card"><span class="tip-icon">🌿</span><div class="tip-text"><strong>Forage Every Single Day</strong> — Foraged items on the ground disappear next day. Walk around town collecting mushrooms, berries, and seasonal items to sell for extra gold!</div></div>
+    </div>
+    <div class="tip-rotator">
+      <div class="tip-rotator-label">⚡ Daily Farming Tip</div>
+      <div class="tip-rotator-text" id="tipRotatorText">Loading...</div>
+      <div class="tip-rotator-nav">
+        <button class="tip-nav-btn" onclick="prevTip()">◀ Prev</button>
+        <span class="tip-counter" id="tipCounter">1/10</span>
+        <button class="tip-nav-btn" onclick="nextTip()">Next ▶</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ H2: APK BOTTOM CTA ══ -->
+  <section style="animation-delay:.55s">
+    <div class="apk-section">
+      <span class="apk-icon">🎮</span>
+      <h2>Play Stardew Valley Free on Android — Download APK Now</h2>
+      <p>Now that you know all the best Stardew Valley strategies, it is time to play! If you want to <strong>download Stardew Valley for free on Android</strong>, you need a safe and trusted APK file. Do NOT download APKs from unknown websites — they can contain viruses and malware!</p>
+      <p><span class="highlight">stardewapksvalley.com</span> is the safest and most trusted source for <strong>Stardew Valley free APK download</strong>. All APK files are scanned, verified, and always updated to the latest version. No cost, no registration — just download and start farming!</p>
+      <div class="apk-badges">
+        <div class="apk-badge">✅ Latest Version</div>
+        <div class="apk-badge">🛡️ 100% Safe & Scanned</div>
+        <div class="apk-badge">📱 All Android Versions</div>
+        <div class="apk-badge">💯 Free Forever</div>
+        <div class="apk-badge">⚡ Instant Download</div>
+      </div>
+      <a href="https://stardewapksvalley.com/" target="_blank" class="apk-btn">🌾 Free Download — stardewapksvalley.com</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- FOOTER STRIP -->
+<div class="footer-strip">
+  <div>
+    <div class="footer-logo">🌾 stardewapksvalley.com</div>
+    <div class="footer-sub">Free Stardew Valley APK Download & Complete Farming Guide</div>
+  </div>
+  <div class="footer-right">
+    <a href="https://stardewapksvalley.com/" target="_blank" class="footer-link primary">📥 Download APK Free</a>
+    <a href="https://stardewvalleywiki.com" target="_blank" class="footer-link ghost">📖 Official Wiki</a>
+  </div>
+</div>
+
+<script>
+  // STARS
+  const starsEl = document.getElementById('stars');
+  for(let i=0;i<100;i++){
+    const s=document.createElement('div'); s.className='star';
+    const sz=Math.random()*2.5+0.5;
+    s.style.cssText=`width:${sz}px;height:${sz}px;top:${Math.random()*85}%;left:${Math.random()*100}%;--dur:${2+Math.random()*4}s;--delay:${Math.random()*5}s`;
+    starsEl.appendChild(s);
+  }
+  // FIREFLIES
+  for(let i=0;i<7;i++){
+    const f=document.createElement('div'); f.className='firefly';
+    f.style.cssText=`left:${10+Math.random()*80}%;top:${30+Math.random()*50}%;--dur:${5+Math.random()*8}s;--delay:${Math.random()*6}s`;
+    document.body.appendChild(f);
+  }
+  // CLOCK
+  function updateClock(){
+    const now=new Date();
+    document.getElementById('clock').textContent=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('heroDate').textContent=`${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()}`;
+    const mo=now.getMonth();
+    const sMap=[{m:[2,3,4],l:'🌸 Spring Season',c:'#f8b4c8'},{m:[5,6,7],l:'☀️ Summer Season',c:'#f5c842'},{m:[8,9,10],l:'🍂 Autumn Season',c:'#e07b39'},{m:[11,0,1],l:'❄️ Winter Season',c:'#a8d8ea'}];
+    const s=sMap.find(x=>x.m.includes(mo))||sMap[0];
+    const b=document.getElementById('seasonBadge'); b.textContent=s.l; b.style.color=s.c; b.style.borderColor=s.c+'60';
+  }
+  updateClock(); setInterval(updateClock,1000);
+
+  // SEASON TABS
+  function showSeason(id,btn){
+    document.querySelectorAll('.season-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+    document.getElementById('panel-'+id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // TIPS
+  const tips=["🌱 Always plant crops on Day 1 of each season — every lost day costs you gold!","💰 Starfruit Wine in a Keg = 2,250g — build kegs as your top priority!","⚡ Never let energy hit zero — always carry food for recovery during long days.","🎣 Fishing gives great early gold — try the mountain lake for rare Catfish!","🏠 Upgrade Watering Can to Gold ASAP — saves huge time and energy every morning.","🐓 Pet your animals every single day for max quality Iridium products!","💎 Always use the Seed Maker on your best crops — never buy seeds when you can make them!","🌿 Forage every day — items on the ground disappear the next morning!","⛏️ Reach mine level 80 for Gold Ore — needed for Iridium tool upgrades at Clint's.","📅 Complete the Community Center for the Greenhouse — grow crops all year in Winter!"];
+  let tipIdx=new Date().getDate()%tips.length;
+  function showTip(){document.getElementById('tipRotatorText').textContent=tips[tipIdx];document.getElementById('tipCounter').textContent=`${tipIdx+1}/${tips.length}`;}
+  function nextTip(){tipIdx=(tipIdx+1)%tips.length;showTip();}
+  function prevTip(){tipIdx=(tipIdx-1+tips.length)%tips.length;showTip();}
+  showTip();
+
+  // SEARCH
+  document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
+  function doSearch(){const q=document.getElementById('searchInput').value.trim();if(!q)return;window.open(`https://stardewvalleywiki.com/mediawiki/index.php?search=${encodeURIComponent(q)}`,'_blank');}
+</script>
+</body>
+</html>

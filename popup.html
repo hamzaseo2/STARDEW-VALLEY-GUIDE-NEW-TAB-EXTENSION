@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stardew Valley Guide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green: #4a7c59;
+      --green-light: #6abf69;
+      --brown: #7c5c2e;
+      --gold: #f5c842;
+      --cream: #fdf6e3;
+      --dark: #2d2016;
+      --red: #c0392b;
+      --blue: #2980b9;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 340px;
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, #2d4a1e 0%, #4a7c59 60%, #6abf69 100%);
+      padding: 14px 16px 10px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -20px; left: -20px; right: -20px; bottom: -20px;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+    .header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 15px;
+      color: var(--gold);
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      letter-spacing: 1px;
+      position: relative;
+    }
+    .header p {
+      font-size: 10px;
+      color: rgba(255,255,255,0.8);
+      margin-top: 3px;
+      position: relative;
+    }
+    .star-icon { font-size: 20px; display: block; margin-bottom: 3px; }
+
+    /* SEASON BADGE */
+    .season-bar {
+      display: flex;
+      background: var(--dark);
+      border-bottom: 2px solid var(--gold);
+    }
+    .season-btn {
+      flex: 1;
+      padding: 6px 4px;
+      font-size: 10px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: rgba(255,255,255,0.6);
+      background: transparent;
+    }
+    .season-btn.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+    .season-btn:hover { color: white; }
+
+    /* CONTENT */
+    .content { padding: 12px 14px; }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      color: var(--brown);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid rgba(124,92,46,0.3);
+    }
+
+    /* CROPS GRID */
+    .crops-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .crop-card {
+      background: white;
+      border: 1px solid rgba(74,124,89,0.3);
+      border-radius: 8px;
+      padding: 7px 5px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .crop-card:hover {
+      border-color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(74,124,89,0.2);
+    }
+    .crop-emoji { font-size: 20px; display: block; }
+    .crop-name { font-size: 9px; font-weight: 700; color: var(--dark); margin-top: 2px; }
+    .crop-days {
+      font-size: 8px;
+      color: var(--green);
+      background: rgba(74,124,89,0.1);
+      border-radius: 10px;
+      padding: 1px 4px;
+      margin-top: 2px;
+      display: inline-block;
+    }
+    .crop-gold { font-size: 8px; color: var(--brown); font-weight: 700; margin-top: 2px; }
+
+    /* TOOLTIP */
+    .crop-card .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--dark);
+      color: white;
+      font-size: 9px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      white-space: nowrap;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .crop-card:hover .tooltip { display: block; }
+
+    /* TIPS BOX */
+    .tip-box {
+      background: linear-gradient(135deg, #fff9e6, #fff3cc);
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .tip-box::before {
+      content: '💡';
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      background: var(--cream);
+      padding: 0 4px;
+      font-size: 14px;
+    }
+    .tip-text {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--dark);
+    }
+    .tip-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 6px;
+    }
+    .tip-btn {
+      background: none;
+      border: 1px solid var(--gold);
+      color: var(--brown);
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .tip-btn:hover { background: var(--gold); color: var(--dark); }
+    .tip-count { font-size: 9px; color: var(--brown); }
+
+    /* QUICK LINKS */
+    .links-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+    .link-btn.primary {
+      background: var(--green);
+      color: white;
+    }
+    .link-btn.primary:hover { background: #3d6b4a; transform: translateY(-1px); }
+    .link-btn.secondary {
+      background: rgba(74,124,89,0.1);
+      color: var(--green);
+      border: 1px solid rgba(74,124,89,0.3);
+    }
+    .link-btn.secondary:hover { background: rgba(74,124,89,0.2); }
+
+    /* FOOTER */
+    .footer {
+      background: var(--dark);
+      padding: 8px 14px;
+      text-align: center;
+    }
+    .footer a {
+      color: var(--gold);
+      font-size: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .footer a:hover { text-decoration: underline; }
+    .footer p { color: rgba(255,255,255,0.4); font-size: 9px; margin-top: 2px; }
+
+    /* SEASON CONTENT */
+    .season-content { display: none; }
+    .season-content.active { display: block; }
+
+    /* SCROLL */
+    .content { max-height: 420px; overflow-y: auto; }
+    .content::-webkit-scrollbar { width: 4px; }
+    .content::-webkit-scrollbar-track { background: transparent; }
+    .content::-webkit-scrollbar-thumb { background: var(--green); border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <span class="star-icon">🌾</span>
+  <h1>Stardew Valley Guide</h1>
+  <p>Your complete farming companion</p>
+</div>
+
+<!-- SEASON TABS -->
+<div class="season-bar">
+  <button class="season-btn active" onclick="setSeason('spring')">🌸 Spring</button>
+  <button class="season-btn" onclick="setSeason('summer')">☀️ Summer</button>
+  <button class="season-btn" onclick="setSeason('fall')">🍂 Fall</button>
+  <button class="season-btn" onclick="setSeason('winter')">❄️ Winter</button>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- SPRING -->
+  <div class="season-content active" id="spring">
+    <br>
+    <div class="section-title">🌱 Best Spring Crops</div>
+    <div class="crops-grid">
+      <div class="crop-card">
+        <div class="tooltip">Plant Day 1 for max harvests!</div>
+        <span class="crop-emoji">🍓</span>
+        <div class="crop-name">Strawberry</div>
+        <div class="crop-days">8 days</div>
+        <div class="crop-gold">120g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Good for beginner gold</div>
+        <span class="crop-emoji">🥔</span>
+        <div class="crop-name">Potato</div>
+        <div class="crop-days">6 days</div>
+        <div class="crop-gold">80g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">High value artisan product!</div>
+        <span class="crop-emoji">🌷</span>
+        <div class="crop-name">Tulip</div>
+        <div class="crop-days">6 days</div>
+        <div class="crop-gold">30g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Put in keg for Pale Ale!</div>
+        <span class="crop-emoji">🌿</span>
+        <div class="crop-name">Hops</div>
+        <div class="crop-days">11 days</div>
+        <div class="crop-gold">25g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Easy crop, good quantity</div>
+        <span class="crop-emoji">🟡</span>
+        <div class="crop-name">Parsnip</div>
+        <div class="crop-days">4 days</div>
+        <div class="crop-gold">35g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Pickled for extra profit!</div>
+        <span class="crop-emoji">🧅</span>
+        <div class="crop-name">Garlic</div>
+        <div class="crop-days">4 days</div>
+        <div class="crop-gold">60g each</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMER -->
+  <div class="season-content" id="summer">
+    <br>
+    <div class="section-title">🌻 Best Summer Crops</div>
+    <div class="crops-grid">
+      <div class="crop-card">
+        <div class="tooltip">Best summer artisan crop!</div>
+        <span class="crop-emoji">🍷</span>
+        <div class="crop-name">Starfruit</div>
+        <div class="crop-days">13 days</div>
+        <div class="crop-gold">750g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Multi-harvest all season!</div>
+        <span class="crop-emoji">🫐</span>
+        <div class="crop-name">Blueberry</div>
+        <div class="crop-days">13 days</div>
+        <div class="crop-gold">80g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Great for cooking!</div>
+        <span class="crop-emoji">🍅</span>
+        <div class="crop-name">Tomato</div>
+        <div class="crop-days">11 days</div>
+        <div class="crop-gold">60g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Sell or put in keg</div>
+        <span class="crop-emoji">🌽</span>
+        <div class="crop-name">Corn</div>
+        <div class="crop-days">14 days</div>
+        <div class="crop-gold">50g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Huge profit from kegs!</div>
+        <span class="crop-emoji">🔴</span>
+        <div class="crop-name">Hot Pepper</div>
+        <div class="crop-days">5 days</div>
+        <div class="crop-gold">40g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Sunflower seeds = bonus!</div>
+        <span class="crop-emoji">🌻</span>
+        <div class="crop-name">Sunflower</div>
+        <div class="crop-days">8 days</div>
+        <div class="crop-gold">80g each</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FALL -->
+  <div class="season-content" id="fall">
+    <br>
+    <div class="section-title">🍂 Best Fall Crops</div>
+    <div class="crops-grid">
+      <div class="crop-card">
+        <div class="tooltip">Highest value fall crop!</div>
+        <span class="crop-emoji">🍇</span>
+        <div class="crop-name">Cranberries</div>
+        <div class="crop-days">7 days</div>
+        <div class="crop-gold">75g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Great for gift giving!</div>
+        <span class="crop-emoji">🎃</span>
+        <div class="crop-name">Pumpkin</div>
+        <div class="crop-days">13 days</div>
+        <div class="crop-gold">320g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Wine = massive profit!</div>
+        <span class="crop-emoji">🍯</span>
+        <div class="crop-name">Beet</div>
+        <div class="crop-days">6 days</div>
+        <div class="crop-gold">100g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Easy cooking ingredient</div>
+        <span class="crop-emoji">🥦</span>
+        <div class="crop-name">Amaranth</div>
+        <div class="crop-days">7 days</div>
+        <div class="crop-gold">150g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Regrows every 5 days!</div>
+        <span class="crop-emoji">🍄</span>
+        <div class="crop-name">Grape</div>
+        <div class="crop-days">10 days</div>
+        <div class="crop-gold">80g each</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Keep for Seed Maker!</div>
+        <span class="crop-emoji">🌺</span>
+        <div class="crop-name">Sweet Gem</div>
+        <div class="crop-days">24 days</div>
+        <div class="crop-gold">3000g each</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WINTER -->
+  <div class="season-content" id="winter">
+    <br>
+    <div class="section-title">❄️ Winter Activities</div>
+    <div class="crops-grid">
+      <div class="crop-card">
+        <div class="tooltip">Fish all day in winter!</div>
+        <span class="crop-emoji">🎣</span>
+        <div class="crop-name">Fishing</div>
+        <div class="crop-days">All Day</div>
+        <div class="crop-gold">Varies</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Upgrade tools at Clint!</div>
+        <span class="crop-emoji">⛏️</span>
+        <div class="crop-name">Mining</div>
+        <div class="crop-days">All Day</div>
+        <div class="crop-gold">Gems</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Build friendships fast!</div>
+        <span class="crop-emoji">👥</span>
+        <div class="crop-name">Socialise</div>
+        <div class="crop-days">All Day</div>
+        <div class="crop-gold">Hearts</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Winter forage items!</div>
+        <span class="crop-emoji">🌿</span>
+        <div class="crop-name">Foraging</div>
+        <div class="crop-days">All Day</div>
+        <div class="crop-gold">100g+</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Craft for spring prep!</div>
+        <span class="crop-emoji">🔨</span>
+        <div class="crop-name">Crafting</div>
+        <div class="crop-days">All Day</div>
+        <div class="crop-gold">Saves gold</div>
+      </div>
+      <div class="crop-card">
+        <div class="tooltip">Animals need care daily!</div>
+        <span class="crop-emoji">🐄</span>
+        <div class="crop-name">Animals</div>
+        <div class="crop-days">All Day</div>
+        <div class="crop-gold">Artisan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAILY TIP -->
+  <div class="section-title">⚡ Daily Tips</div>
+  <div class="tip-box">
+    <div class="tip-text" id="tipText">Loading tip...</div>
+    <div class="tip-nav">
+      <button class="tip-btn" onclick="prevTip()">◀ Prev</button>
+      <span class="tip-count" id="tipCount">1/10</span>
+      <button class="tip-btn" onclick="nextTip()">Next ▶</button>
+    </div>
+  </div>
+
+  <!-- QUICK LINKS -->
+  <div class="section-title">🔗 Quick Links</div>
+  <div class="links-grid">
+    <a href="https://stardewapksvalley.com/" target="_blank" class="link-btn primary">
+      📥 Download APK
+    </a>
+    <a href="https://stardew.fandom.com/wiki/Stardew_Valley_Wiki" target="_blank" class="link-btn secondary">
+      📖 Official Wiki
+    </a>
+    <a href="https://stardewapksvalley.com/" target="_blank" class="link-btn secondary">
+      🆕 Latest Mods
+    </a>
+    <a href="https://stardewapksvalley.com/" target="_blank" class="link-btn secondary">
+      🗺️ Farm Planner
+    </a>
+  </div>
+
+</div><!-- end content -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <a href="https://stardewapksvalley.com/" target="_blank">🌾 stardewapksvalley.com</a>
+  <p>Your #1 Stardew Valley Resource</p>
+</div>
+
+<script>
+  const tips = [
+    "🌱 Plant crops on Day 1 of each season — every day counts!",
+    "💰 Artisan profession doubles Wine & Pickle value — best gold maker!",
+    "⚡ Save energy by watering crops first, then mining.",
+    "🎣 Fishing gives early game gold — fish in the mountain lake for Catfish!",
+    "🏠 Upgrade your backpack early — more items = more profit per trip.",
+    "🐓 Keep animals happy every day for max quality products.",
+    "💎 Donate minerals to the museum for rewards and friendship.",
+    "🌿 Kegs triple crop value — always prioritize building kegs!",
+    "⛏️ Go to level 80+ in mines for Gold Ore — needed for tools.",
+    "📅 Check the calendar for festivals and never miss a day!"
+  ];
+
+  let tipIndex = 0;
+
+  function showTip() {
+    document.getElementById('tipText').textContent = tips[tipIndex];
+    document.getElementById('tipCount').textContent = `${tipIndex + 1}/${tips.length}`;
+  }
+
+  function nextTip() {
+    tipIndex = (tipIndex + 1) % tips.length;
+    showTip();
+  }
+
+  function prevTip() {
+    tipIndex = (tipIndex - 1 + tips.length) % tips.length;
+    showTip();
+  }
+
+  function setSeason(season) {
+    document.querySelectorAll('.season-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.season-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(season).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // Random tip on open
+  tipIndex = Math.floor(Math.random() * tips.length);
+  showTip();
+</script>
+
+</body>
+</html>

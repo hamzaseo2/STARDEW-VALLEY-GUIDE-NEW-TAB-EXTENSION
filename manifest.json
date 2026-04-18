@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Stardew Valley Guide & Tips",
+  "version": "1.0.0",
+  "description": "Quick Stardew Valley tips, seasonal guide, crops info and more! Visit stardewapksvalley.com for APK downloads.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Stardew Valley Guide",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  }
+}
